@@ -1,0 +1,64 @@
+#Ingress Rule
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: example-ingress
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+spec:
+  rules:
+    - host: integration-apis.backend.com
+      http:     
+        paths:
+          - path: /host-resource-path/*
+            pathType: Prefix
+            backend:
+              serviceName: <deployment-service-name>
+              servicePort: 80
+    - host: abc.com
+      http:     
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              serviceName: <deployment-service-name>
+              servicePort: 80
+    - host: www.123.com
+      http:     
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              serviceName: <deployment-service-name>
+              servicePort: 80
+    - host: ccc.com.gh
+      http:     
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              serviceName: <deployment-service-name>
+              servicePort: 80
+    - host: acs.com.gh
+      http:     
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              serviceName: <deployment-service-name>
+              servicePort: 80
+    - host: frontend.com
+      http:     
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              serviceName: <deployment-service-name>
+              servicePort: 80
+  tls:
+    - hosts: 
+      - abc.com
+      - frontend.com
+      secretName: example-tls-secret
+
+    # tls can be provided for multiple host
